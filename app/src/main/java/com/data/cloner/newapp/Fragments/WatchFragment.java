@@ -97,7 +97,7 @@ public class WatchFragment extends Fragment {
     }
 
     private void fetchVideoFeed() {
-        String url = "https://alikhbariah.com/wp-json/custom/v1/settings";
+        String url = "";
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
@@ -110,7 +110,7 @@ public class WatchFragment extends Fragment {
                             // You can extract video ID or title if needed
                             String title = "YouTube Live Stream";
                             String link = liveUrl;
-                            String thumbnail = "https://img.youtube.com/vi/" +
+                            String thumbnail = "" +
                                     Uri.parse(liveUrl).getQueryParameter("v") + "/hqdefault.jpg";
 
                             videoList.clear(); // optional: clear old videos

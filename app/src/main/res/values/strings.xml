@@ -37,16 +37,14 @@
     <string name="allow_notification">Allow app notifications to stay updated with the latest news and alerts.</string>
     <string name="btn_allow_notification">Allow Notifications</string>
     <string name="not_now">Not Now</string>
-    <string name="user_key" translatable="false">AIzaSyDPmz4OM5PJo-Y20GKzhTRViUP6U0gNw10</string>
+
     <string name="emailLogin" translatable="false">Email</string>
     <string name="passwordLogin" translatable="false">Password</string>
     <string name="news_image">News Image</string>
     <string name="news_title">News Title</string>
     <string name="news_subtitle">News Subtitle</string>
     <string name="signout">SignOut</string>
-    <string name="facebook_app_id" translatable="false">532523832991815</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb532523832991815</string>
-    <string name="client_token" translatable="false">913cd41bd19ea4b5530af2ce13899ae0</string>
+
 
     <string name="general">GENERAL</string>
     <string name="business">BUSINESS</string>

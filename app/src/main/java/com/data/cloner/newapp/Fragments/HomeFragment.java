@@ -128,29 +128,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-//    private void fetchPosts() {
-//        WordPressApi api = ApiClient.getClient().create(WordPressApi.class);
-//        Call<List<Post>> call = api.getPosts(true);  // Always fetch all posts
-//
-//        call.enqueue(new Callback<List<Post>>() {
-//            @Override
-//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-//                if (!isAdded() || getContext() == null) return;
-//
-//                if (response.isSuccessful() && response.body() != null) {
-//                    postList.clear();
-//                    postList.addAll(response.body());
-//                    adapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Post>> call, Throwable t) {
-//                t.printStackTrace();
-//            }
-//        });
-//    }
-    // with shared preferences
+
 private void fetchPosts() {
     if (!isAdded()) return;
 
