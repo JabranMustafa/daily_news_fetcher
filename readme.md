@@ -84,15 +84,16 @@ Feel free to rename packages to match your organization.
 
 ---
 
-## 🖼️ Screenshots
+## 🖼 Screenshots
 
-Add PNGs to `/screenshots` and link them here. For example:
+| Screen 1 | Screen 2 | Screen 3 |
+|----------|----------|----------|
+| ![](screenshots/sc1.png) | ![](screenshots/sc2.png) | ![](screenshots/sc3.png) |
 
-| Home | Category | Article |
-| ---- | -------- | ------- |
-|      |          |         |
+| Screen 4 | Screen 5 |
+|----------|----------|
+| ![](screenshots/sc4.png) | ![](screenshots/sc5.png) |
 
----
 
 ## 📈 Roadmap
 
