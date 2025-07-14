@@ -21,23 +21,7 @@
         tools:layout_editor_absoluteY="24dp" />
 
 
-    <!--    &lt;!&ndash; Search Bar &ndash;&gt;
-        <EditText
-            android:id="@+id/etSearch"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:hint="Search for news"
-            android:background="@drawable/search_bg"
-            android:drawableEnd="@drawable/ic_search"
-            android:padding="12dp"
-            android:textColor="#FFF"
-            android:textColorHint="#BDBDBD"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp" />-->
 
-        <!-- Login Title -->
         <TextView
             android:id="@+id/tvLoginTitle"
             android:layout_width="wrap_content"

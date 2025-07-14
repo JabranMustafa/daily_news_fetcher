@@ -44,9 +44,9 @@
     <string name="news_title">News Title</string>
     <string name="news_subtitle">News Subtitle</string>
     <string name="signout">SignOut</string>
-    <string name="facebook_app_id" translatable="false">1866229730412841</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb1866229730412841</string>
-    <string name="client_token" translatable="false">b180c47cacd1a687c7cd85461b62e5fd</string>
+    <string name="facebook_app_id" translatable="false">532523832991815</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb532523832991815</string>
+    <string name="client_token" translatable="false">913cd41bd19ea4b5530af2ce13899ae0</string>
 
     <string name="general">GENERAL</string>
     <string name="business">BUSINESS</string>
@@ -60,7 +60,6 @@
     <string name="watch">Watch</string>
     <string name="topic">Topic</string>
     <string name="profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="my_account">My Account</string>
     <string name="news_test">Enrich your AI News experience by creating an account.</string>
@@ -106,4 +105,32 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="account_settings">Account Settings</string>
+    <string name="help_support">Help Support</string>
+    <string name="change_language">Change Language</string>
+    <string name="home">Home</string>
+    <string name="videos">Videos</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="detuch">Detuch</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="auto_play_video">Auto Play Video</string>
+    <string name="first_screen_txt">مصدر أخبارك الموثوق أول بأول. تابع آخر الأحداث المحلية والعالمية في مكان واحد.</string>
+    <string name="welcome_text">أهلاً بك في الاخبارية</string>
+    <string name="skip_txt">تخطي</string>
+    <string name="firstscreen_btn">التالي</string>
+    <string name="second_scrn_txt">كل الأخبار التي تهمك</string>
+    <string name="second_scren_discription">رياضة، سياسة، اقتصاد، تكنولوجيا، فنون والمزيد — اختر اهتماماتك واستمتع بتجربة مخصصة لك.</string>
+    <string name="previous_btn">السابق</string>
+    <string name="third_screen_txt">لا تفوّت أي خبر عاجل</string>
+    <string name="third_screen_discription">فعّل التنبيهات لتكون أول من يعرف بالأخبار العاجلة والمستجدات لحظة بلحظة.</string>
+    <string name="done_txt">انهاء</string>
+    <string name="notification_txt">الاشعارات</string>
+    <string name="notification_discription">السماح ل استقبال اشعارات التطبيق في جميع الاوقات ب اخر الاخبار و الحالات</string>
+    <string name="allow_notification_btn">السماح للاشعارات</string>
+    <string name="not_now_txt">ليس الان</string>
+    <string name="facebook_txt">الاستمرار عبر فيسبوك</string>
+    <string name="apple_icon">الاستمرار عبر ابل</string>
+    <string name="email_txt">المتابعة بالبريد الالكتروني</string>
+    <string name="search_hint">ابحث عن الخبر</string>
 </resources>

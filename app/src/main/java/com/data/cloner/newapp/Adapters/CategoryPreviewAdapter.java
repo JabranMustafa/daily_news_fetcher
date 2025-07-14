@@ -1,7 +1,6 @@
 package com.data.cloner.newapp.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.data.cloner.newapp.Fragments.CategoryListFragment;
 import com.data.cloner.newapp.modelClass.CategoryPreview;
 import com.data.cloner.newapp.R;
-import com.kwabenaberko.newsapilib.models.Article;
+import com.data.cloner.newapp.modelClass.Post;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -40,37 +39,37 @@ public class CategoryPreviewAdapter extends  RecyclerView.Adapter<CategoryPrevie
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CategoryPreview preview = items.get(position);
-        Article article = preview.getArticle();
-        if (article != null) {
-            holder.title.setText(article.getTitle());
+//        Article article = preview.getArticle();
+        Post post = preview.getPost();
+        String imageUrl = post.getImageUrl();
+        if (post != null) {
+            holder.title.setText(post.title.rendered);
 
-            if (article.getUrlToImage() != null && !article.getUrlToImage().isEmpty()) {
-                Picasso.get().load(article.getUrlToImage()).into(holder.imageView);
-            } else {
-                holder.imageView.setImageResource(R.drawable.ic_launcher_background); // fallback image
-            }
-
+            Picasso.get()
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_launcher_background)  // Optional: fallback while loading
+                    .error(R.drawable.ic_launcher_background)       // Optional: if load fails
+                    .into(holder.imageView);
             holder.itemView.setOnClickListener(v -> {
-//                Intent intent = new Intent(context, CategoryListFragment.class);
-//                intent.putExtra("category",preview.getCategory());
-//
-//                context.startActivity(intent);
-                CategoryListFragment fragment = CategoryListFragment.newInstance(preview.getCategory());
-
+                CategoryListFragment fragment = CategoryListFragment.newInstance(
+                        preview.getCategory(),  // slug or label
+                        preview.getCategoryId() // real numeric category ID from WordPress
+                );
                 ((AppCompatActivity) context).getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, fragment)
                         .addToBackStack(null)
                         .commit();
             });
-        }
-        else {
-            // Optional: hide this item or show a placeholder
-            holder.title.setText("No article available");
+        } else {
+            holder.title.setText("No post available");
             holder.imageView.setImageResource(R.drawable.ic_launcher_background);
-            holder.itemView.setOnClickListener(null); // disable click
+            holder.itemView.setOnClickListener(null);
         }
     }
+
+
+
 
     @Override
     public int getItemCount() {

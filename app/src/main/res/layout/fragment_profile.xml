@@ -7,118 +7,139 @@
     android:background="@android:color/white"
     tools:context=".Fragments.ProfileFragment">
 
-    <!-- Title Bar -->
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <!-- Search Box -->
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/my_account"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:hint="@string/search_hint"
+        android:drawableEnd="@drawable/ic_search"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:background="@drawable/rounded_search_bg"
+        android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintEnd_toStartOf="@+id/logoImage"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
 
+
+    <!-- Logo and Chat Icon -->
     <ImageView
-        android:id="@+id/settings_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintTop_toTopOf="@id/title"
+        android:id="@+id/logoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_app_icon"
+        app:layout_constraintTop_toTopOf="@id/searchEditText"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp" />
 
-    <!-- Description Text -->
+    <!-- Header Title "\u062a\u0633\u062c\u064a\u0644" -->
     <TextView
-        android:id="@+id/desc"
-        android:layout_width="0dp"
+        android:id="@+id/headerTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/news_test"
-        android:textSize="16sp"
+        android:text="\u062a\u0633\u062c\u064a\u0644"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        android:textColor="@color/teal_700"
+        app:layout_constraintTop_toBottomOf="@id/searchEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        android:layout_marginTop="16dp" />
 
-    <!-- Buttons (Google, Apple, Facebook, Email) -->
-    <Button
+    <!-- Arrow -->
+    <ImageView
+        android:id="@+id/arrowIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow"
+        app:layout_constraintTop_toTopOf="@id/headerTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Social Buttons -->
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_google"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/continue_with_google"
-        android:drawableStart="@drawable/newlogo"
-        android:backgroundTint="@android:color/white"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/desc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        android:text="الاستمرار عبر جوجل"
+        android:drawableEnd="@drawable/devicon_google"
+        android:textColor="#04A6A9"
+        android:background="@drawable/button_border"
 
-    <Button
-        android:id="@+id/btn_apple"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/continue_with_apple"
-        android:drawableStart="@drawable/ic_launcher_background"
-        android:backgroundTint="@color/white"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/btn_google"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        app:layout_constraintTop_toBottomOf="@id/headerTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_facebook"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/continue_with_facebook"
-        android:drawableStart="@drawable/ic_launcher_background"
-        android:backgroundTint="@android:color/white"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/btn_apple"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        android:text="@string/facebook_txt"
+        android:drawableEnd="@drawable/logos_facebook"
+        android:background="@drawable/button_border"
+        android:textColor="#04A6A9"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_google"
+        app:layout_constraintStart_toStartOf="@id/btn_google"
+        app:layout_constraintEnd_toEndOf="@id/btn_google" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_apple"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/apple_icon"
+        android:drawableEnd="@drawable/apple"
+        android:background="@drawable/button_border"
+        android:textColor="#04A6A9"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_facebook"
+        app:layout_constraintStart_toStartOf="@id/btn_google"
+        app:layout_constraintEnd_toEndOf="@id/btn_google" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/continue_with_email"
-        android:drawableStart="@drawable/ic_launcher_background"
-        android:backgroundTint="@android:color/white"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/btn_facebook"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        android:text="@string/email_txt"
+        android:drawable="@drawable/ic_email"
+        android:background="@drawable/button_border"
+        android:textColor="#04A6A9"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_apple"
+        app:layout_constraintStart_toStartOf="@id/btn_google"
+        app:layout_constraintEnd_toEndOf="@id/btn_google" />
 
-    <!-- Sign-in Prompt -->
+    <!-- Sign-in Option -->
     <TextView
-        android:id="@+id/signin_prompt"
+        android:id="@+id/tv_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in"
-        android:textColor="@android:color/black"
+        android:text="لديك بالفعل حساب؟  تسجبل دخول"
         android:textSize="14sp"
-        android:textStyle="italic"
+        android:textColor="@color/teal_700"
         app:layout_constraintTop_toBottomOf="@id/btn_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="16dp" />
+
+    <!-- Warning Text -->
+    <TextView
+        android:id="@+id/tv_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="الرجاء تسجيل الدخول او انشاء حساب للوصول الى هذه الميزة"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_signin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

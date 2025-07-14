@@ -39,11 +39,9 @@ public class WebViewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-
      * @return A new instance of fragment WebViewFragment.
      */
     // TODO: Rename and change types and number of parameters
-
     public static WebViewFragment newInstance(String url) {
         WebViewFragment fragment = new WebViewFragment();
         Bundle args = new Bundle();
@@ -51,6 +49,7 @@ public class WebViewFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public static WebViewFragment newInstance(String param1, String param2) {
         WebViewFragment fragment = new WebViewFragment();
         Bundle args = new Bundle();
@@ -93,13 +92,6 @@ public class WebViewFragment extends Fragment {
 
         return view;
 
-       /* String url = getArguments() != null ? getArguments().getString(ARG_URL) : null;
-        if (url != null) {
-            webView.loadUrl(url);
-        }
 
-        return view;
-    }*/
-        // Inflate the layout for this fragment
-
-    }}
+    }
+}

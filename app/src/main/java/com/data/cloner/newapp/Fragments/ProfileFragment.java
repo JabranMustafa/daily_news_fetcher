@@ -6,12 +6,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.data.cloner.newapp.Activities.NewsActivity;
 import com.data.cloner.newapp.R;
@@ -93,6 +96,13 @@ public class ProfileFragment extends Fragment {
         if (!FacebookSdk.isInitialized()) {
             FacebookSdk.sdkInitialize(requireContext().getApplicationContext());
         }
+//        ImageView settingsIcon = view.findViewById(R.id.settings_icon);
+//        settingsIcon.setOnClickListener(v -> {
+//            DrawerLayout drawerLayout = requireActivity().findViewById(R.id.drawer_layout);
+//            if (drawerLayout != null) {
+//                drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        });
         btn_google=view.findViewById(R.id.btn_google);
         btn_facebook=view.findViewById(R.id.btn_facebook);
 

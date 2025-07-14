@@ -1,23 +1,25 @@
 package com.data.cloner.newapp.modelClass;
 
-import com.kwabenaberko.newsapilib.models.Article;
-
-public class CategoryPreview {
+public class CategoryPreview  {
     private String category;
-    private com.kwabenaberko.newsapilib.models.Article article;
+    private int categoryId;
+    private Post post;
 
-
-    public CategoryPreview(String category, com.kwabenaberko.newsapilib.models.Article article) {
+    public CategoryPreview(String category, int categoryId, Post post) {
         this.category = category;
-        this.article = article;
+        this.categoryId = categoryId;
+        this.post = post;
     }
-
 
     public String getCategory() {
         return category;
     }
 
-    public Article getArticle() {
-        return article;
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public Post getPost() {
+        return post;
     }
 }

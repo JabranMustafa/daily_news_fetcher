@@ -8,7 +8,6 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -29,46 +28,42 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class FirstScreen extends AppCompatActivity {
-     Button btnNext;
-     TextView skip;
+    Button btnNext;
+    TextView skip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_first_screen);
 
-        btnNext=findViewById(R.id.btnfirstScreen);
-        skip=findViewById(R.id.tvSkip);
+        btnNext = findViewById(R.id.btnfirstScreen);
+        skip = findViewById(R.id.tvSkip);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainLayout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FirstScreen.this, SecondScreen.class);
-                startActivity(intent);
-            }
+        btnNext.setOnClickListener(v -> {
+            Intent intent = new Intent(FirstScreen.this, SecondScreen.class);
+            startActivity(intent);
         });
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (PermissionUtils.isNotificationPermissionGranted(FirstScreen.this)) {
-                    // Notification already allowed → go to Home
-                    startActivity(new Intent(FirstScreen.this, NewsActivity.class));
-                } else {
-                    // Not allowed yet → show NotificationActivity
-                    startActivity(new Intent(FirstScreen.this, NotificationScreen.class));
-                }
+        skip.setOnClickListener(v -> {
+            if (PermissionUtils.isNotificationPermissionGranted(FirstScreen.this)) {
+                // Notification already allowed → go to Home
+                startActivity(new Intent(FirstScreen.this, NewsActivity.class));
+            } else {
+                // Not allowed yet → show NotificationActivity
+                startActivity(new Intent(FirstScreen.this, NotificationScreen.class));
+            }
 //                Intent intent = new Intent(FirstScreen.this,NotificationScreen.class);
 //                startActivity(intent);
-            }
         });
         printHashKey(this);
 
     }
+
     public static void printHashKey(Context pContext) {
         try {
             PackageInfo info = pContext.getPackageManager().getPackageInfo(pContext.getPackageName(), PackageManager.GET_SIGNATURES);

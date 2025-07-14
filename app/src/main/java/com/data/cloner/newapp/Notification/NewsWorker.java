@@ -5,24 +5,25 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.data.cloner.newapp.Activities.WebView_Notification;
-import com.data.cloner.newapp.Fragments.WebViewFragment;
+import com.data.cloner.newapp.Activities.NewsActivity;
 import com.data.cloner.newapp.R;
-import com.kwabenaberko.newsapilib.NewsApiClient;
-import com.kwabenaberko.newsapilib.models.Article;
-import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
-import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
+import com.data.cloner.newapp.utils.ApiClient;
+import com.data.cloner.newapp.modelClass.Post;
+import com.data.cloner.newapp.utils.WordPressApi;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewsWorker extends Worker {
     public NewsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -32,38 +33,41 @@ public class NewsWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        Context context = getApplicationContext();
         CountDownLatch latch = new CountDownLatch(1);
-        NewsApiClient client = new NewsApiClient("614c81fb00e0498e8f1ab46c0f5fae87");
 
-        TopHeadlinesRequest request = new TopHeadlinesRequest.Builder()
-                .language("en")
-                .pageSize(10)
-                .build();
+        WordPressApi api = ApiClient.getClient().create(WordPressApi.class);
+        Call<List<Post>> call = api.getPosts(true); // using _embed=true
 
-        client.getTopHeadlines(request, new NewsApiClient.ArticlesResponseCallback() {
+        SharedPreferences prefs = context.getSharedPreferences("news_prefs", Context.MODE_PRIVATE);
+        String lastTitle = prefs.getString("last_title", "");
+
+        final Result[] result = {Result.success()};
+
+        call.enqueue(new Callback<List<Post>>() {
             @Override
-            public void onSuccess(ArticleResponse response) {
-                List<Article> articles = response.getArticles();
-                Context context = getApplicationContext();
-                SharedPreferences prefs = context.getSharedPreferences("news_prefs", Context.MODE_PRIVATE);
-                String lastTitle = prefs.getString("last_title", "");
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    for (Post post : response.body()) {
+                        String title = post.title.rendered;
+                        String content = post.content.rendered;
+                        String link = post.link;
 
-                for (Article article : articles) {
-                    if (article.getTitle() != null && article.getUrl() != null && !article.getTitle().equals(lastTitle)) {
-                        sendNotification(article.getTitle(), article.getDescription(), article.getUrl());
-
-                        // Save latest as last notified
-                        prefs.edit().putString("last_title", article.getTitle()).apply();
-                        break;
+                        if (!title.equals(lastTitle)) {
+                            sendNotification(context, title, stripHtml(content), link);
+                            prefs.edit().putString("last_title", title).apply();
+                            break;
+                        }
                     }
+                } else {
+                    result[0] = Result.failure();
                 }
-
                 latch.countDown();
             }
 
             @Override
-            public void onFailure(Throwable throwable) {
-                Log.e("NewsWorker", "Error: " + throwable.getMessage());
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                result[0] = Result.failure();
                 latch.countDown();
             }
         });
@@ -74,16 +78,14 @@ public class NewsWorker extends Worker {
             return Result.failure();
         }
 
-        return Result.success();
+        return result[0];
     }
 
-    private void sendNotification(String title, String message, String url) {
-        Context context = getApplicationContext();
-
-        Intent intent = new Intent(context, WebView_Notification.class);
+    private void sendNotification(Context context, String title, String message, String url) {
+        Intent intent = new Intent(context, NewsActivity.class);
         intent.putExtra("url", url);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Log.d("NewsWorker", "Sending notification for URL: " + url);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(
                 context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
@@ -98,5 +100,9 @@ public class NewsWorker extends Worker {
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(1, builder.build());
+    }
+
+    private String stripHtml(String html) {
+        return html.replaceAll("<[^>]*>", "").trim();
     }
 }

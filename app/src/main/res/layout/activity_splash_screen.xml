@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@drawable/splash_gradient"
     tools:context=".Activities.SplashScreen">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -15,7 +15,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/newlogo"
+        android:src="@drawable/splashlogo"
+        android:id="@+id/splashLogo"
         android:layout_margin="@dimen/_40sdp"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:src="@drawable/splashbottomicon"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

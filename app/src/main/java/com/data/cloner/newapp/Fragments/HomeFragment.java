@@ -1,27 +1,38 @@
 package com.data.cloner.newapp.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.data.cloner.newapp.Activities.NewsActivity;
+import com.data.cloner.newapp.Adapters.FeaturedNewsAdapter;
 import com.data.cloner.newapp.Adapters.NewsRecyclerAdapter;
 import com.data.cloner.newapp.R;
-import com.kwabenaberko.newsapilib.NewsApiClient;
-import com.kwabenaberko.newsapilib.models.Article;
-import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
-import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
+import com.data.cloner.newapp.utils.ApiClient;
+import com.data.cloner.newapp.utils.NewsTickerManager;
+import com.data.cloner.newapp.modelClass.Post;
+import com.data.cloner.newapp.utils.WordPressApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,11 +41,14 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
 
-//    eb168fa54f674a859df5a71478fb2208
+    //    eb168fa54f674a859df5a71478fb2208
     private RecyclerView recyclerView;
     private NewsRecyclerAdapter adapter;
-    private List<Article> articleList;
-//    private ProgressBar loading;
+    private ViewPager2 featuredViewPager;
+    private FeaturedNewsAdapter featuredAdapter;
+    private TextView tickerView;
+
+    private final List<Post> postList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,57 +95,136 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-            recyclerView = view.findViewById(R.id.news_recycler_view);
-//        loading = view.findViewById(R.id.progress_bar);
-            articleList = new ArrayList<>();
-            adapter = new NewsRecyclerAdapter(articleList,getChildFragmentManager());
-            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-            recyclerView.setAdapter(adapter);
+        // Initialize views
+        tickerView = view.findViewById(R.id.breakingNewsTicker);
+        recyclerView = view.findViewById(R.id.news_recycler_view);
+        featuredViewPager = view.findViewById(R.id.featured_viewpager);
 
-            getNews("general", null);
+        featuredViewPager.setClipToPadding(false);
+        featuredViewPager.setClipChildren(false);
+        featuredViewPager.setOffscreenPageLimit(3);
+        featuredViewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-            return view;
+        CompositePageTransformer transformer = new CompositePageTransformer();
+        transformer.addTransformer(new MarginPageTransformer(24)); // spacing between items
+        transformer.addTransformer((page, position) -> {
+            float r = 1 - Math.abs(position);
+            page.setScaleY(0.95f + r * 0.05f); // optional zoom effect
+        });
+        featuredViewPager.setPageTransformer(transformer);
+        // Set up ticker
+        if (tickerView != null) {
+            NewsTickerManager.fetchNewsAndSetTicker(tickerView);
+        }
+
+        // Layout for news list
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        // Start fetching content
+       fetchPosts();
+
+        return view;
 
 
-
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+//    private void fetchPosts() {
+//        WordPressApi api = ApiClient.getClient().create(WordPressApi.class);
+//        Call<List<Post>> call = api.getPosts(true);  // Always fetch all posts
+//
+//        call.enqueue(new Callback<List<Post>>() {
+//            @Override
+//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+//                if (!isAdded() || getContext() == null) return;
+//
+//                if (response.isSuccessful() && response.body() != null) {
+//                    postList.clear();
+//                    postList.addAll(response.body());
+//                    adapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Post>> call, Throwable t) {
+//                t.printStackTrace();
+//            }
+//        });
+//    }
+    // with shared preferences
+private void fetchPosts() {
+    if (!isAdded()) return;
 
+    SharedPreferences prefs = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+    String categoryIdsCsv = prefs.getString("last_toggled_categories", null);
 
-void getNews(String category,String query){
-//        changeInProgress(true);
-        NewsApiClient newsApiClient = new NewsApiClient("614c81fb00e0498e8f1ab46c0f5fae87");
-        newsApiClient.getTopHeadlines(
-                new TopHeadlinesRequest.Builder()
-                        .language("en").category(category)
-                        .q(query)
-                        .build(),
-                new NewsApiClient.ArticlesResponseCallback() {
-                    @Override
-                    public void onSuccess(ArticleResponse response) {
+    WordPressApi api = ApiClient.getClient().create(WordPressApi.class);
+    Call<List<Post>> call = (categoryIdsCsv != null && categoryIdsCsv.matches("\\d+(,\\d+)*"))
+            ? api.getPostsByCategories(true, categoryIdsCsv)
+            : api.getPosts(true);
 
-//                        requireActivity().runOnUiThread(()->{
-//                            Log.i("GOT Success",response.toString());
-//                            changeInProgress(false);
-                            articleList = response.getArticles();
-                            adapter.updateData(articleList);
-                            adapter.notifyDataSetChanged();
-//                        });
+    call.enqueue(new Callback<List<Post>>() {
+        @Override
+        public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+            if (!isAdded() || getContext() == null || response.body() == null) return;
 
-                    }
+            List<Post> data = response.body();
 
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        try {
+            if (data.isEmpty()) {
+                Log.e("HomeFragment", "No posts returned from API");
+                return;
+            }
 
-                        } catch (Exception e) {
-//                            throw new RuntimeException(e);
-                        }
-//                        Log.i("GOT Failure",throwable.getMessage());
-                    }
-                }
-        );
+            postList.clear();
+            postList.addAll(data);
+
+            // Defensive safety: check view references are valid
+            if (featuredViewPager == null || recyclerView == null) {
+                Log.e("HomeFragment", "ViewPager or RecyclerView not initialized");
+                return;
+            }
+
+            List<Post> featuredList = data.size() >= 5
+                    ? data.subList(0, 5)
+                    : new ArrayList<>(data);
+
+            // Use try-catch to trap UI crashes
+            try {
+                featuredAdapter = new FeaturedNewsAdapter(featuredList, getParentFragmentManager());
+                featuredViewPager.setAdapter(featuredAdapter);
+                featuredViewPager.post(() -> {
+                    featuredViewPager.setCurrentItem(1, false);
+                    featuredViewPager.setCurrentItem(0, false);
+                });
+
+                adapter = new NewsRecyclerAdapter(data, getParentFragmentManager());
+                recyclerView.setAdapter(adapter);
+
+                Log.d("DEBUG", "Featured: " + featuredList.size() + " | AllPosts: " + postList.size());
+            } catch (Exception e) {
+                Log.e("HomeFragment", "Adapter or view setup crash: ", e);
+            }
+        }
+
+        @Override
+        public void onFailure(Call<List<Post>> call, Throwable t) {
+            Log.e("HomeFragment", "Network/API error: ", t);
+        }
+    });
+}
+@Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof NewsActivity) {
+            ((NewsActivity) context).setChannelChangeListener(() -> fetchPosts());
+        }
     }
+
+    @Override
+    public void onDetach() {
+        if (getActivity() instanceof NewsActivity) {
+            ((NewsActivity) getActivity()).setChannelChangeListener(null);
+        }
+        super.onDetach();
+    }
+
 }

@@ -43,16 +43,14 @@ public class VideoNewsAdapter extends RecyclerView.Adapter<VideoNewsAdapter.Vide
         Picasso.get().load(video.getThumbnail()).into(holder.thumbnail);
 
         holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, NewsFullActivity.class);
-//            intent.putExtra("url", video.getLink());
-////            intent.putExtra("tab", "watch");
-//            context.startActivity(intent);
+
             Fragment fragment = WebViewFragment.newInstance(video.getLink());
             ((FragmentActivity) v.getContext()).getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
                     .commit();
+
         });
     }
 

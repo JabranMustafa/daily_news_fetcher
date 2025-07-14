@@ -2,6 +2,7 @@ package com.data.cloner.newapp.Fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,18 +10,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.data.cloner.newapp.Adapters.NewsRecyclerAdapter;
 import com.data.cloner.newapp.modelClass.CategoryPreview;
 import com.data.cloner.newapp.Adapters.CategoryPreviewAdapter;
 import com.data.cloner.newapp.R;
-import com.kwabenaberko.newsapilib.NewsApiClient;
-import com.kwabenaberko.newsapilib.models.Article;
-import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
-import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
+import com.data.cloner.newapp.utils.ApiClient;
+import com.data.cloner.newapp.modelClass.Category;
+import com.data.cloner.newapp.utils.NewsTickerManager;
+import com.data.cloner.newapp.modelClass.Post;
+import com.data.cloner.newapp.utils.WordPressApi;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,10 +40,14 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class TopicsFragment extends Fragment {
-       RecyclerView recyclerView;
-    private final String[] categories = {
-            "general", "sports", "business", "technology", "entertainment", "health", "science"
-    };
+    RecyclerView recyclerView;
+    SearchView searchView;
+    TextView tickerView;
+    private List<CategoryPreview> previews = new ArrayList<>();
+    private Map<String, Integer> categoryMap = new HashMap<>();
+
+    // Map of category names to WordPress category IDs (you must replace these with real values from your site)
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,69 +92,130 @@ public class TopicsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_topics, container, false);
-      recyclerView =view.findViewById(R.id.category_main_recycler_view);
-        loadCategoryPreviews();
+        View view = inflater.inflate(R.layout.fragment_topics, container, false);
+        recyclerView = view.findViewById(R.id.category_main_recycler_view);
+        tickerView = view.findViewById(R.id.breakingNewsTicker);
+        NewsTickerManager.fetchNewsAndSetTicker(tickerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        searchView = view.findViewById(R.id.search_view);
+      fetchCategoriesAndThenPosts();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                fetchSearchedPosts(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return view;
     }
-    private void loadCategoryPreviews() {
-        List<CategoryPreview> previews = new ArrayList<>();
-        CategoryPreviewAdapter adapter = new CategoryPreviewAdapter(getContext(), previews);
 
+    private void fetchCategoriesAndThenPosts() {
+        WordPressApi api = ApiClient.getClient().create(WordPressApi.class);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-
-        for (String category : categories) {
-            NewsApiClient client = new NewsApiClient("614c81fb00e0498e8f1ab46c0f5fae87");
-
-            TopHeadlinesRequest request = new TopHeadlinesRequest.Builder()
-                    .language("en")
-                    .category(category)
-                    .pageSize(1) // Only get one article
-                    .build();
-
-//            client.getTopHeadlines(request, new NewsApiClient.ArticlesResponseCallback() {
-//                @Override
-//                public void onSuccess(ArticleResponse response) {
-//                    runOnUiThread(() -> {
-//                        if (response.getArticles() != null && !response.getArticles().isEmpty()) {
-//                            Article first = response.getArticles().get(0);
-//                            previews.add(new CategoryPreview(category, first));
-//                            adapter.notifyDataSetChanged();
-//                        }
-//                    });
-//                }
-            client.getTopHeadlines(request, new NewsApiClient.ArticlesResponseCallback() {
-                @Override
-                public void onSuccess(ArticleResponse response) {
-                    if (response.getArticles() != null && !response.getArticles().isEmpty()) {
-                            Article first = response.getArticles().get(0);
-                            previews.add(new CategoryPreview(category, first));
-                            adapter.notifyDataSetChanged();
-                        }
+        api.getCategories(100).enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    for (Category cat : response.body()) {
+                        categoryMap.put(cat.slug, cat.id);
+                    }
+                    fetchCategoryPreviews();
+                } else {
+//                    Toast.makeText(getContext(), "No categories found", Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Throwable throwable) {
-                    try {
-
-//                            Toast.makeText(getContext(), "error loading", Toast.LENGTH_SHORT).show();
-                        } catch (RuntimeException e) {
-//                        throw new RuntimeException(e);
-                    }
-                    }
-
-
-            });
-
-//                @Override
-//                public void onFailure(Throwable throwable) {
-//                    runOnUiThread(() ->
-//                            Toast.makeText(getContext(), "Error loading " + category, Toast.LENGTH_SHORT).show()
-//                    );
-//                }
-//            });
-        }
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Failed to fetch categories", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    private void fetchCategoryPreviews() {
+        WordPressApi api = ApiClient.getClient().create(WordPressApi.class);
+
+        api.getPosts(true).enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if (!isAdded() || getContext() == null) return;
+                if (response.isSuccessful() && response.body() != null) {
+                    previews.clear();
+                    Set<Integer> addedCategoryIds = new HashSet<>();
+
+                    for (Post post : response.body()) {
+                        if (post.categories != null) {
+                            for (int catId : post.categories) {
+                                if (!addedCategoryIds.contains(catId)) {
+                                    // get slug by ID
+                                    String categorySlug = getCategorySlugById(catId);
+                                    if (categorySlug != null) {
+                                        previews.add(new CategoryPreview(categorySlug, catId, post));
+                                        addedCategoryIds.add(catId);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (getContext() != null) {
+                        CategoryPreviewAdapter adapter = new CategoryPreviewAdapter(getContext(), previews);
+                        recyclerView.setAdapter(adapter);
+                    }
+                    if (previews.isEmpty()) {
+//                        Toast.makeText(getContext(), "No posts found per category", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                if (getContext() != null){
+//                    Toast.makeText(getContext(), "Failed to fetch posts", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+    }
+
+    private void fetchSearchedPosts(String query) {
+        WordPressApi api = ApiClient.getClient().create(WordPressApi.class);
+        api.getPosts(true).enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Post> results = new ArrayList<>();
+                    for (Post post : response.body()) {
+                        if (post.title != null && post.title.rendered.toLowerCase().contains(query.toLowerCase())) {
+                            results.add(post);
+                        }
+                    }
+
+                    NewsRecyclerAdapter adapter = new NewsRecyclerAdapter(results, getChildFragmentManager());
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Search failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private String getCategorySlugById(int id) {
+        for (Map.Entry<String, Integer> entry : categoryMap.entrySet()) {
+            if (entry.getValue() == id) return entry.getKey();
+        }
+        return null;
+    }
+
+
 }
+

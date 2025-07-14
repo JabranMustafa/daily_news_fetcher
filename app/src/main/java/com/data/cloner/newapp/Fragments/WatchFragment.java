@@ -1,5 +1,6 @@
 package com.data.cloner.newapp.Fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.data.cloner.newapp.R;
 import com.data.cloner.newapp.modelClass.VideoArticle;
 import com.data.cloner.newapp.Adapters.VideoNewsAdapter;
+import com.data.cloner.newapp.utils.NewsTickerManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,6 +36,7 @@ import java.util.List;
 public class WatchFragment extends Fragment {
     RecyclerView recyclerView;
     List<VideoArticle> videoList;
+    TextView tickerView;
     VideoNewsAdapter adapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,6 +83,8 @@ public class WatchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_watch, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
+        tickerView = view.findViewById(R.id.breakingNewsTicker);
+        NewsTickerManager.fetchNewsAndSetTicker(tickerView);
         videoList = new ArrayList<>();
         adapter = new VideoNewsAdapter(getContext(), videoList);
 
@@ -89,29 +95,38 @@ public class WatchFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+
     private void fetchVideoFeed() {
-        String url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?channel_id=UCNye-wNBqNL5ZzHSJj3l8Bg&api_key=f8bvzlnytvr3q7smgbnnt7hxhj1x8z59wbeipp68";
+        String url = "https://alikhbariah.com/wp-json/custom/v1/settings";
+
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
-            try {
-                JSONArray items = response.getJSONArray("items");
-                for (int i = 0; i < items.length(); i++) {
-                    JSONObject video = items.getJSONObject(i);
-                    String title = video.getString("title");
-                    String link = video.getString("link");
-                    String thumbnail = "";
-                    if (video.has("thumbnail")) {
-                        thumbnail = video.getString("thumbnail");
-                    } else if (video.has("enclosure")) {
-                        thumbnail = video.getJSONObject("enclosure").getString("link");
-                    }                    videoList.add(new VideoArticle(title, link, thumbnail));
-                }
-                adapter.notifyDataSetChanged();
-            } catch (Exception e) {
-                Log.e("JSONError", e.getMessage());
-            }
-        }, error -> Log.e("FeedError", error.toString()));
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        if (response.has("youtube_live_url")) {
+                            String liveUrl = response.getString("youtube_live_url");
+
+                            // You can extract video ID or title if needed
+                            String title = "YouTube Live Stream";
+                            String link = liveUrl;
+                            String thumbnail = "https://img.youtube.com/vi/" +
+                                    Uri.parse(liveUrl).getQueryParameter("v") + "/hqdefault.jpg";
+
+                            videoList.clear(); // optional: clear old videos
+                            videoList.add(new VideoArticle(title, link, thumbnail));
+                            adapter.notifyDataSetChanged();
+                        }
+                    } catch (Exception e) {
+                        Log.e("JSONError", e.getMessage());
+                    }
+                },
+                error -> Log.e("FeedError", error.toString())
+        );
 
         queue.add(request);
     }
+
+
+
 }

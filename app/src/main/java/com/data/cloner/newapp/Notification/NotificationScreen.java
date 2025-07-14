@@ -41,8 +41,8 @@ public class NotificationScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_notification_screen);
-        notification=findViewById(R.id.btnAllow);
-        notNow=findViewById(R.id.tvNotNow);
+        notification = findViewById(R.id.btnAllow);
+        notNow = findViewById(R.id.tvNotNow);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -62,6 +62,7 @@ public class NotificationScreen extends AppCompatActivity {
             }
         });
     }
+
     private void requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)

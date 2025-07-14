@@ -2,7 +2,6 @@ package com.data.cloner.newapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -32,30 +31,21 @@ public class SecondScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SecondScreen.this, FirstScreen.class);
-                startActivity(intent);
-            }
+        previous.setOnClickListener(v -> {
+            Intent intent = new Intent(SecondScreen.this, FirstScreen.class);
+            startActivity(intent);
         });
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SecondScreen.this, ThirdScreen.class);
-                startActivity(intent);
-            }
+        next.setOnClickListener(v -> {
+            Intent intent = new Intent(SecondScreen.this, ThirdScreen.class);
+            startActivity(intent);
         });
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (PermissionUtils.isNotificationPermissionGranted(SecondScreen.this)) {
-                    // Notification already allowed → go to Home
-                    startActivity(new Intent(SecondScreen.this, NewsActivity.class));
-                } else {
-                    // Not allowed yet → show NotificationActivity
-                    startActivity(new Intent(SecondScreen.this, NotificationScreen.class));
-                }
+        skip.setOnClickListener(v -> {
+            if (PermissionUtils.isNotificationPermissionGranted(SecondScreen.this)) {
+                // Notification already allowed → go to Home
+                startActivity(new Intent(SecondScreen.this, NewsActivity.class));
+            } else {
+                // Not allowed yet → show NotificationActivity
+                startActivity(new Intent(SecondScreen.this, NotificationScreen.class));
             }
         });
     }

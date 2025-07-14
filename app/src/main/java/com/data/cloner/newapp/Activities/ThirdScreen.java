@@ -32,35 +32,26 @@ public class ThirdScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ThirdScreen.this, SecondScreen.class);
-                startActivity(intent);
+        previous.setOnClickListener(v -> {
+            Intent intent = new Intent(ThirdScreen.this, SecondScreen.class);
+            startActivity(intent);
+        });
+        next.setOnClickListener(v -> {
+            if (PermissionUtils.isNotificationPermissionGranted(ThirdScreen.this)) {
+                // Notification already allowed → go to Home
+                startActivity(new Intent(ThirdScreen.this, NewsActivity.class));
+            } else {
+                // Not allowed yet → show NotificationActivity
+                startActivity(new Intent(ThirdScreen.this, NotificationScreen.class));
             }
         });
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (PermissionUtils.isNotificationPermissionGranted(ThirdScreen.this)) {
-                    // Notification already allowed → go to Home
-                    startActivity(new Intent(ThirdScreen.this, NewsActivity.class));
-                } else {
-                    // Not allowed yet → show NotificationActivity
-                    startActivity(new Intent(ThirdScreen.this, NotificationScreen.class));
-                }
-            }
-        });
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (PermissionUtils.isNotificationPermissionGranted(ThirdScreen.this)) {
-                    // Notification already allowed → go to Home
-                    startActivity(new Intent(ThirdScreen.this, NewsActivity.class));
-                } else {
-                    // Not allowed yet → show NotificationActivity
-                    startActivity(new Intent(ThirdScreen.this, NotificationScreen.class));
-                }
+        skip.setOnClickListener(v -> {
+            if (PermissionUtils.isNotificationPermissionGranted(ThirdScreen.this)) {
+                // Notification already allowed → go to Home
+                startActivity(new Intent(ThirdScreen.this, NewsActivity.class));
+            } else {
+                // Not allowed yet → show NotificationActivity
+                startActivity(new Intent(ThirdScreen.this, NotificationScreen.class));
             }
         });
     }

@@ -60,4 +60,22 @@
     <string name="watch">المشاهدة</string>
     <string name="topic">الموضوع</string>
     <string name="profile">الملف الشخصي</string>
+    <string name="hello_blank_fragment">مرحبًا</string>
+    <string name="my_account">حسابي</string>
+    <string name="news_test">قم بتحسين تجربة أخبار الذكاء الاصطناعي الخاصة بك بإنشاء حساب.</string>
+    <string name="sign_in">هل لديك حساب؟ تسجيل الدخول</string>
+    <string name="continue_with_email">المتابعة باستخدام البريد الإلكتروني</string>
+
+    <!-- Fragments for navigation -->
+    <string name="first_fragment_label">الجزء الأول</string>
+    <string name="second_fragment_label">الجزء الثاني</string>
+
+    <string name="account_settings">إعدادات الحساب</string>
+    <string name="help_support">المساعدة والدعم</string>
+    <string name="change_language">تغيير اللغة</string>
+    <string name="home">الرئيسية</string>
+    <string name="videos">فيديوهات</string>
+    <string name="english">الإنجليزية</string>
+    <string name="arabic">العربية</string>
+    <string name="detuch">الألمانية</string>
 </resources>

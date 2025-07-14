@@ -14,92 +14,87 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.data.cloner.newapp.Fragments.WebViewFragment;
 import com.data.cloner.newapp.R;
-import com.kwabenaberko.newsapilib.models.Article;
+import com.data.cloner.newapp.modelClass.Post;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class NewsRecyclerAdapter  extends RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder> {
+public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.NewsViewHolder> {
 
     private FragmentManager fragmentManager;
-    List<Article> articleList;
+    List<Post> postList;
 
-    public NewsRecyclerAdapter(List<Article> articleList, FragmentManager fm) {
+    public NewsRecyclerAdapter(List<Post> postList, FragmentManager fm) {
 
-        this.articleList = articleList;
+        this.postList = postList;
         this.fragmentManager = fm;
     }
 
 
-
-@NonNull
-@Override
-public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_recycler_row,parent,false);
-    return new NewsViewHolder(view);
-}
-
-@Override
-public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-    com.kwabenaberko.newsapilib.models.Article article = articleList.get(position);
-    if (article != null) {
-    holder.titleTextView.setText(article.getTitle());
-    holder.sourceTextView.setText(article.getSource().getName());
-        if (article.getUrlToImage() != null && !article.getUrlToImage().isEmpty()) {
-            Picasso.get().load(article.getUrlToImage())
-                    .error(R.drawable.ic_launcher_background)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(holder.imageView);
-        }else {
-            holder.imageView.setImageResource(R.drawable.ic_launcher_background);}
+    @NonNull
+    @Override
+    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_recycler_row, parent, false);
+        return new NewsViewHolder(view);
     }
 
-    holder.itemView.setOnClickListener((v -> {
+    @Override
+    public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
+        Post post = postList.get(position);
+        if (post != null && holder.titleTextView != null) {
+            holder.titleTextView.setText(post.title.rendered);
 
-        Fragment fragment = WebViewFragment.newInstance(article.getUrl());
-        ((FragmentActivity) v.getContext()).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
+            String imageUrl = post.getImageUrl();
+
+            if (holder.imageView != null && imageUrl != null) {
+                Picasso.get()
+                        .load(imageUrl)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.ic_launcher_background)
+                        .into(holder.imageView);
+            }
+
+            if (holder.sourceTextView != null) {
+                holder.sourceTextView.setText("المصدر");  // Optional: Replace with category/source
+            }
+
+            holder.itemView.setOnClickListener((v -> {
+                Fragment fragment = WebViewFragment.newInstance(post.link);
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }));
+        }
 
 
-    }));
-
- /*       Fragment fragment = WebViewFragment.newInstance(article.getUrl());
-
-        ((FragmentActivity) v.getContext()).getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-
-    }));*/
-
-}
-
-public void updateData(List<Article> data){
-    articleList.clear();
-    articleList.addAll(data);
-    notifyDataSetChanged();
-
-}
-
-@Override
-public int getItemCount() {
-    return articleList.size();
-}
-
-class NewsViewHolder extends RecyclerView.ViewHolder{
-
-    TextView titleTextView,sourceTextView;
-    ImageView imageView;
-
-    public NewsViewHolder(@NonNull View itemView) {
-        super(itemView);
-        titleTextView = itemView.findViewById(R.id.article_title);
-        sourceTextView = itemView.findViewById(R.id.article_source);
-        imageView = itemView.findViewById(R.id.article_image_view);
     }
-}
+
+    public void updateData(List<Post> data) {
+        postList.clear();
+        postList.addAll(data);
+        notifyDataSetChanged();
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return postList.size();
+    }
+
+
+    class NewsViewHolder extends RecyclerView.ViewHolder {
+
+        TextView titleTextView, sourceTextView;
+        ShapeableImageView imageView;
+
+        public NewsViewHolder(@NonNull View itemView) {
+            super(itemView);
+            titleTextView = itemView.findViewById(R.id.article_title);
+            sourceTextView = itemView.findViewById(R.id.article_source);
+            imageView = itemView.findViewById(R.id.article_image_view);
+        }
+    }
 }
