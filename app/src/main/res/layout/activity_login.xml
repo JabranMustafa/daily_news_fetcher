@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@color/teal_700"
+
+    tools:context=".Activities.Login">
+
+    <Spinner
+        android:id="@+id/spinnerLanguages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="24dp" />
+
+
+
+        <TextView
+            android:id="@+id/tvLoginTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"/>
+
+        <!-- Email Field -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etEmailLogin"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="@string/emailLogin"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/input_bg"
+            android:padding="12dp"
+            android:textColor="#FFF"
+            android:textColorHint="#F2ECEC"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="24dp" />
+
+        <!-- Password Field -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPasswordLogin"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="@string/passwordLogin"
+            android:inputType="textPassword"
+            android:background="@drawable/input_bg"
+
+            android:padding="12dp"
+            android:textColor="#FFF"
+            android:textColorHint="#BDBDBD"
+            app:layout_constraintTop_toBottomOf="@id/etEmailLogin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp" />
+
+        <!-- Forgot Password -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:textColor="#80CBC4"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/etPasswordLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="8dp"/>
+
+        <!-- Login Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="@string/loginBtn"
+            android:textColor="#004D40"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvForgotPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="24dp"/>
+
+        <!-- Divider with "or" -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:textColor="#BDBDBD"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp"/>
+
+        <!-- Google Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGoogle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_38sdp"
+            android:text="@string/continue_with_google"
+            android:drawableEnd="@drawable/baseline_login_24"
+            android:background="@drawable/social_button_bg"
+            android:textColor="#FFFFFF"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/tvOr"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp" />
+
+        <!-- Facebook Button -->
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btnFacebook"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_38sdp"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/continue_with_facebook"
+            android:drawableEnd="@drawable/baseline_login_24"
+            android:background="@drawable/social_button_bg"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/btnGoogle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="12dp" />
+
+        <!-- Apple Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnApple"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_38sdp"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/continue_with_apple"
+            android:drawableEnd="@drawable/baseline_login_24"
+            android:background="@drawable/social_button_bg"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/btnFacebook"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="12dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

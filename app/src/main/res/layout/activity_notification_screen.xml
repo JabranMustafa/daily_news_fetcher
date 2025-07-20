@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="@dimen/_24sdp">
+
+
+<ImageView
+    android:id="@+id/imgNotification"
+    android:layout_width="@dimen/_200sdp"
+    android:layout_height="@dimen/_200sdp"
+    app:layout_constraintTop_toTopOf="parent"
+    android:scaleType="fitCenter"
+    android:layout_marginTop="@dimen/_24sdp"
+    android:src="@drawable/notification_img"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<!-- Title -->
+<TextView
+    android:id="@+id/tvNotificationTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_16sdp"
+    android:text="@string/notification_txt"
+    android:textColor="#04A6A9"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    app:layout_constraintTop_toBottomOf="@id/imgNotification"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<!-- Subtitle -->
+<TextView
+    android:id="@+id/tvNotificationSubtitle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp"
+    android:gravity="center"
+    android:lineSpacingExtra="4dp"
+
+    android:text="@string/notification_discription"
+    android:textColor="#04A6A9"
+    android:textSize="14sp"
+    app:layout_constraintTop_toBottomOf="@id/tvNotificationTitle"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+<!-- Page Indicator -->
+
+<!-- Next Button -->
+    <Button
+        android:id="@+id/btnAllow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/_15sdp"
+        android:backgroundTint="#04A6A9"
+        android:text="@string/allow_notification_btn"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotificationSubtitle" />
+
+    <TextView
+        android:id="@+id/tvNotNow"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:text="@string/not_now_txt"
+        android:textColor="#04A6A9"
+         android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAllow" />
+</androidx.constraintlayout.widget.ConstraintLayout>

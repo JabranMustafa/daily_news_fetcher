@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">تطبيق جديد</string>
+    <string name="select_channels">اختر القنوات</string>
+    <string name="you_can_update_your_selection_at_any_time_in_settings">يمكنك تحديث اختيارك في أي وقت من الإعدادات</string>
+    <string name="get_started">ابدأ الآن</string>
+    <string name="company_logo">شعار الشركة</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="date_of_birth">تاريخ الميلاد</string>
+    <string name="sign_up">سجّل</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="forgot_password">هل نسيت كلمة المرور؟</string>
+    <string name="loginBtn">تسجيل الدخول</string>
+    <string name="or">أو</string>
+    <string name="continue_with_google">تابع باستخدام Google</string>
+    <string name="continue_with_facebook">تابع باستخدام Facebook</string>
+    <string name="continue_with_apple">تابع باستخدام Apple</string>
+    <string name="en" translatable="false">تغيير اللغة</string>
+    <string name="ar" translatable="false">تغيير اللغة</string>
+    <string name="skip">تخطي</string>
+    <string name="news_illustration">رسم توضيحي للأخبار</string>
+    <string name="welcome_to_newsly">أهلاً بك في Newsly</string>
+    <string name="first_screen_text">
+        مصدرك الموثوق للأخبار من المصدر. تابع آخر المستجدات المحلية والعالمية في مكان واحد.
+    </string>
+    <string name="next">التالي</string>
+    <string name="all_the_news_that_matters">كل الأخبار التي تهمك</string>
+    <string name="categories">
+        رياضة، سياسة، اقتصاد، تكنولوجيا، فنون والمزيد —\nاختر اهتماماتك واستمتع بتجربة مخصصة لك.
+    </string>
+    <string name="previous">السابق</string>
+    <string name="breaking_news">لا تفوت أي خبر عاجل</string>
+    <string name="enable_notification">
+        فعّل الإشعارات لتكون أول من يعرف بالأخبار العاجلة والمستجدات لحظة بلحظة.
+    </string>
+    <string name="done">إنهاء</string>
+    <string name="notification_image">صورة إشعار</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="allow_notification">
+        السماح لاستقبال إشعارات التطبيق للبقاء على اطلاع بآخر الأخبار والتنبيهات.
+    </string>
+    <string name="btn_allow_notification">السماح للإشعارات</string>
+    <string name="not_now">ليس الآن</string>
+    <string name="news_image">صورة الخبر</string>
+    <string name="news_title">عنوان الخبر</string>
+    <string name="news_subtitle">ملخص الخبر</string>
+    <string name="signout">تسجيل الخروج</string>
+    <string name="general">عام</string>
+    <string name="business">أعمال</string>
+    <string name="sports">رياضة</string>
+    <string name="technology">تكنولوجيا</string>
+    <string name="health">صحة</string>
+    <string name="entertainment">ترفيه</string>
+    <string name="science">علم</string>
+    <string name="al_jazeera">الجزيرة</string>
+    <string name="news">الأخبار</string>
+    <string name="watch">المشاهدة</string>
+    <string name="topic">الموضوع</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="hello_blank_fragment">مرحبًا</string>
+    <string name="my_account">حسابي</string>
+    <string name="news_test">قم بتحسين تجربة أخبار الذكاء الاصطناعي الخاصة بك بإنشاء حساب.</string>
+    <string name="sign_in">هل لديك حساب؟ تسجيل الدخول</string>
+    <string name="continue_with_email">المتابعة باستخدام البريد الإلكتروني</string>
+
+    <!-- Fragments for navigation -->
+    <string name="first_fragment_label">الجزء الأول</string>
+    <string name="second_fragment_label">الجزء الثاني</string>
+
+    <string name="account_settings">إعدادات الحساب</string>
+    <string name="help_support">المساعدة والدعم</string>
+    <string name="change_language">تغيير اللغة</string>
+    <string name="home">الرئيسية</string>
+    <string name="videos">فيديوهات</string>
+    <string name="english">الإنجليزية</string>
+    <string name="arabic">العربية</string>
+    <string name="detuch">الألمانية</string>
+</resources>

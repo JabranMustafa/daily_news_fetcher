@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_bg"
+    tools:context=".Activities.ChannelActivity">
+    <TextView
+        android:id="@+id/tvSelectChannels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_channels"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Channel Buttons (Row 1) -->
+    <LinearLayout
+        android:id="@+id/row1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectChannels"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp">
+
+        <include layout="@layout/channel_item"
+            android:id="@+id/channel1"
+
+            android:tag="Al Jazeera English,#FFA500"/>
+
+        <include layout="@layout/channel_item"
+            android:id="@+id/channel2"
+            android:tag="الجزيرة نت,#33CCFF"/>
+    </LinearLayout>
+
+    <!-- Channel Buttons (Row 2) -->
+    <LinearLayout
+        android:id="@+id/row2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/row1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp">
+
+        <include layout="@layout/channel_item"
+            android:id="@+id/channel3"
+            android:tag="الجزيرة مباشر,#9933CC"/>
+
+        <include layout="@layout/channel_item"
+            android:id="@+id/channel4"
+            android:tag="الجزيرة الوثائقية,#33CCCC"/>
+    </LinearLayout>
+
+    <!-- Channel Buttons (Row 3) -->
+    <LinearLayout
+        android:id="@+id/row3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/row2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp">
+
+        <include layout="@layout/channel_item"
+            android:id="@+id/channel5"
+            android:tag="Al Jazeera Balkans,#FF5733"/>
+
+        <include layout="@layout/channel_item"
+            android:id="@+id/channel6"
+            android:tag="Al Jazeera 中文,#FFD700"/>
+    </LinearLayout>
+
+    <!-- Info Text -->
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/you_can_update_your_selection_at_any_time_in_settings"
+        android:textSize="14sp"
+        android:textColor="@color/teal_200"
+        app:layout_constraintTop_toBottomOf="@id/row3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"/>
+
+    <!-- Get Started Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGetStarted"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="@string/get_started"
+        android:textColor="@color/black"
+        android:background="@drawable/rounded_button"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

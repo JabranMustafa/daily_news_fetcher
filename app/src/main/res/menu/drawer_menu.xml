@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/dark_mode"
+        android:title="@string/dark_mode"
+        app:actionLayout="@layout/dark_mode_switch"/>
+
+    <item android:id="@+id/nav_help" android:title="@string/help_support"/>
+    <item android:id="@+id/nav_languageChange" android:title="@string/change_language" >
+        <menu>
+            <item
+                android:id="@+id/nav_english"
+                android:title="@string/english" />
+            <item
+                android:id="@+id/nav_arabic"
+                android:title="@string/arabic" />
+            <item
+                android:id="@+id/nav_german"
+                android:title="@string/detuch" />
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/channel_syria"
+            android:title="Channel Syria"
+            app:actionLayout="@layout/switch_channel_item" />
+
+        <item
+            android:id="@+id/channel_economy"
+            android:title="Economy"
+            app:actionLayout="@layout/switch_channel_item" />
+
+        <item
+            android:id="@+id/channel_general"
+            android:title="General"
+            app:actionLayout="@layout/switch_channel_item" />
+        <item
+            android:id="@+id/channel_local"
+            android:title="Local"
+            app:actionLayout="@layout/switch_channel_item" />
+
+        <item
+            android:id="@+id/channel_articles"
+            android:title="Artical"
+            app:actionLayout="@layout/switch_channel_item" />
+
+
+    </group>
+</menu>

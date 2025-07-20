@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">NewApp</string>
+    <string name="select_channels">Select channels</string>
+    <string name="you_can_update_your_selection_at_any_time_in_settings">You can update your selection at any time in settings</string>
+    <string name="get_started">Get Started</string>
+    <string name="company_logo">Company Logo</string>
+    <string name="create_account">Create Account</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+
+    <string name="forgot_password">Forgot password?</string>
+    <string name="loginBtn">Login</string>
+    <string name="or">or</string>
+
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="continue_with_apple">Continue with Apple</string>
+    <string name="en" translatable="false">change language</string>
+    <string name="ar" translatable="false">change language</string>
+    <string name="skip">Skip</string>
+    <string name="news_illustration">News Illustration</string>
+    <string name="welcome_to_newsly">Welcome to Newsly</string>
+    <string name="first_screen_text">Your trusted source for first-hand news. Follow the latest local and international updates — all in one place.</string>
+    <string name="next">Next</string>
+    <string name="all_the_news_that_matters">All the News That Matters</string>
+    <string name="categories">Sports, politics, economy, tech, art anf more —\nChoose your interests and enjoy a personalized experience.</string>
+    <string name="previous">Previous</string>
+    <string name="breaking_news">Never Miss a Breaking News Alert</string>
+    <string name="enable_notification">Enable notifications to be the first to know about major events and updates in real time.</string>
+    <string name="done">Done</string>
+    <string name="notification_image">Notification Image</string>
+    <string name="notifications">Notifications</string>
+    <string name="allow_notification">Allow app notifications to stay updated with the latest news and alerts.</string>
+    <string name="btn_allow_notification">Allow Notifications</string>
+    <string name="not_now">Not Now</string>
+
+    <string name="emailLogin" translatable="false">Email</string>
+    <string name="passwordLogin" translatable="false">Password</string>
+    <string name="news_image">News Image</string>
+    <string name="news_title">News Title</string>
+    <string name="news_subtitle">News Subtitle</string>
+    <string name="signout">SignOut</string>
+
+
+    <string name="general">GENERAL</string>
+    <string name="business">BUSINESS</string>
+    <string name="sports">SPORTS</string>
+    <string name="technology">TECHNOLOGY</string>
+    <string name="health">HEALTH</string>
+    <string name="entertainment">ENTERTAINMENT</string>
+    <string name="science">SCIENCE</string>
+    <string name="al_jazeera">Al Jazeera</string>
+    <string name="news">News</string>
+    <string name="watch">Watch</string>
+    <string name="topic">Topic</string>
+    <string name="profile">Profile</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_account">My Account</string>
+    <string name="news_test">Enrich your AI News experience by creating an account.</string>
+    <string name="sign_in">Already have an account? Sign In</string>
+    <string name="continue_with_email">Continue with Email</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+    <string name="account_settings">Account Settings</string>
+    <string name="help_support">Help Support</string>
+    <string name="change_language">Change Language</string>
+    <string name="home">Home</string>
+    <string name="videos">Videos</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
+    <string name="detuch">Detuch</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="auto_play_video">Auto Play Video</string>
+    <string name="first_screen_txt">مصدر أخبارك الموثوق أول بأول. تابع آخر الأحداث المحلية والعالمية في مكان واحد.</string>
+    <string name="welcome_text">أهلاً بك في الاخبارية</string>
+    <string name="skip_txt">تخطي</string>
+    <string name="firstscreen_btn">التالي</string>
+    <string name="second_scrn_txt">كل الأخبار التي تهمك</string>
+    <string name="second_scren_discription">رياضة، سياسة، اقتصاد، تكنولوجيا، فنون والمزيد — اختر اهتماماتك واستمتع بتجربة مخصصة لك.</string>
+    <string name="previous_btn">السابق</string>
+    <string name="third_screen_txt">لا تفوّت أي خبر عاجل</string>
+    <string name="third_screen_discription">فعّل التنبيهات لتكون أول من يعرف بالأخبار العاجلة والمستجدات لحظة بلحظة.</string>
+    <string name="done_txt">انهاء</string>
+    <string name="notification_txt">الاشعارات</string>
+    <string name="notification_discription">السماح ل استقبال اشعارات التطبيق في جميع الاوقات ب اخر الاخبار و الحالات</string>
+    <string name="allow_notification_btn">السماح للاشعارات</string>
+    <string name="not_now_txt">ليس الان</string>
+    <string name="facebook_txt">الاستمرار عبر فيسبوك</string>
+    <string name="apple_icon">الاستمرار عبر ابل</string>
+    <string name="email_txt">المتابعة بالبريد الالكتروني</string>
+    <string name="search_hint">ابحث عن الخبر</string>
+</resources>

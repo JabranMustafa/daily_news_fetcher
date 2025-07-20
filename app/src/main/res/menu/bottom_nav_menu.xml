@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home"
+        android:iconTint="@color/app_color"
+        android:icon="@drawable/home_img"
+        android:title="@string/home" />
+
+    <item android:id="@+id/nav_video"
+        android:iconTint="@color/app_color"
+        android:icon="@drawable/video_img"
+        android:title="@string/videos" />
+
+    <item android:id="@+id/nav_Category"
+        android:iconTint="@color/app_color"
+        android:icon="@drawable/topics_img"
+        android:title="@string/topic" />
+
+    <item android:id="@+id/nav_profile"
+        android:iconTint="@color/app_color"
+        android:icon="@drawable/profile_img"
+        android:title="@string/profile" />
+</menu>

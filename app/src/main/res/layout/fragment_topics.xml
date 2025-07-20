@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.TopicsFragment">
+    <TextView
+        android:id="@+id/breakingNewsTicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#AD0B28"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollHorizontally="true"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="top"
+        android:text="Loading Breaking News..." />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:queryHint="Search topics..." />
+
+    <!-- RecyclerView below SearchView using margin -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_main_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:padding="8dp"
+        android:clipToPadding="false" />
+</FrameLayout>
